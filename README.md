@@ -25,15 +25,13 @@
 
 * Segmentation
 
-  - [x] 分析DarkNet，写服务器代码自动调用
-  - [x] 得到DarkNet的结果并进行图片裁剪
+  - [x] 得到Yolo的结果并进行图片裁剪
   - [x] 将得到的图片调用Leonardo云端API返回
   - [x] 将得到的返回值FeatureVector给下一步处理
 
 * Feature Processing
 
-  - [ ] 将得到的Feature Vector与数据库中的数据进行相似度比较
-  - [ ] 返回对应的菜品信息
+  - [ ] 将得到的Feature Vector与数据库中的数据进行相似度比较，返回对应的菜品信息
   - [ ] 顺带写一个简单的数据库管理脚本/界面
 
 * 前端界面，后端Server的交互
