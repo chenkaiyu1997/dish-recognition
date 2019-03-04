@@ -3,7 +3,7 @@
 
 ### 架构说明
 
-<img src="https://github.com/chenkaiyu1997/dish-recognition/blob/master/structure.png" width="500"/>
+<img src="https://github.com/chenkaiyu1997/dish-recognition/blob/master/structure.png" width="800"/>
 
 * 前端基于Wepy的微信小程序开发，并使用了Vant-weapp的组件
 * ObjectDetection模型基于yolo-keras库开发
