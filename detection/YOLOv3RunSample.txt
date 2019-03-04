@@ -1,0 +1,3 @@
+python yolo_video.py --gpu_num 0 --image
+python yolo_video.py --gpu_num 1 --image
+python yolo_video.py --image

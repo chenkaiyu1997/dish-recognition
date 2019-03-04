@@ -1,0 +1,120 @@
+<style type="less">
+
+.cardcontainer{
+  border-radius: 2rpx;
+  margin-top: 30rpx;
+  width: 80%;
+  height: 200rpx;
+  padding: 20rpx;
+  border:2rpx solid #f7f2f0; 
+  box-shadow:5rpx 10rpx 5rpx #f5e5e6;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  background-color: white;
+}
+
+.cardphoto{
+  margin-left: -10rpx;
+  display:inline-block;
+}
+
+.cardtext{
+  vertical-align: top;
+  margin-top:0rpx;
+  margin-left: 30rpx;
+  display:inline-block;
+  font-weight:800;
+  font-size: 40rpx;
+  color:#555555;
+}
+.cardprice{
+  position: absolute;
+  right:20rpx;
+  top:80rpx;
+  color:#ff002b;
+  font-weight:800;
+  font-size: 40rpx;
+}
+.greytext{
+  font-size: 27rpx;
+  color:#aaaaaa;
+}
+.bluetext{
+  font-weight: 800;
+  font-size: 42rpx;
+  color:#346488;
+}
+
+</style>
+<template>
+  <!-- <view class="groupitem">
+    --<text class="id">{{gitem.childid}}.</text>
+    <text class="name" @tap="tap"> {{gitem.childname}}</text>
+  </view> -->
+  <view class="cardcontainer">
+    <view class = "hot" wx:if="{{dish.hot == 1}}">
+      <image
+          style="height:25rpx; width: 55rpx; position:absolute; left: -10rpx; top: 20rpx;"
+          mode="scaleToFill"
+          src="{{hotpath}}"
+      ></image>
+    </view>
+    <view class="cardphoto">
+      <image
+          style="margin-left:15rpx; margin-top:25rpx; height:160rpx; width:160rpx; border-radius:50%"
+          mode="scaleToFill"
+          src="{{dish.path}}"
+      ></image>
+    </view>
+    <view class="cardtext">
+      <view>
+          <text>{{dish.name}}</text>
+      </view>
+
+      <view style="margin-top: -10rpx">
+        <repeat for="{{dish.stars}}" index="index" item="item" key="key">
+          <image style="margin-right:10rpx; margin-bottom:-5rpx; width: 30rpx; height: 30rpx;"
+              src="{{item}}">
+          </image>
+        </repeat>
+      </view>
+
+      <view style="margin-top: 0rpx">
+        <text class="greytext"> Fat: </text> <text class="bluetext"> {{dish.fat}} </text> <text class="greytext">g</text>
+      </view>
+      <view style="margin-top: -10rpx">
+        <text class="greytext"> Calories: </text> <text class="bluetext"> {{dish.calories}} </text><text class="greytext"> kCal </text>
+      </view>
+
+    </view>
+
+    <view class="cardprice">
+      <text>{{'￥' + dish.price}}</text>
+    </view>
+
+  </view>
+
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class Card extends wepy.component {
+    props = {
+      dish: {}
+    }
+    data = {
+      hotpath: '../images/hot.png'
+    }
+    methods = {
+      tap () {
+        this.gitem.childname = `Child Random(${Math.random()})`
+        console.log(`Clicked Group ${this.$parent.$index}. Item ${this.$index}, ID is ${this.gitem.childid}`)
+      }
+    }
+    onLoad() {
+
+    }
+  }
+</script>

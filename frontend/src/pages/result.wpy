@@ -1,0 +1,184 @@
+/* eslint-disable */
+<style lang="less">
+
+</style>
+<template>
+<scroll-view scroll-y style="background-color: #f6f1ee">
+  <view style="background-color: #482021; height:500rpx">
+    <view style="position:absolute; top:100rpx; text-align:center; left:0rpx; right:0rpx">
+      <image
+        style="width: 500rpx; height: 300rpx; border-radius: 20rpx;"
+        mode="scaleToFill"
+        src="{{srcimage}}"
+      ></image>
+      <image
+        style="z-index: 1; width: 150rpx; position: absolute; height: 150rpx; left: 20%; top: -50rpx"
+        mode="scaleToFill"
+        src="{{medal}}"
+      ></image>
+
+      <image
+        style="z-index: 1; width: 300rpx; position: absolute; height: 100rpx; left: 55%; top: -70rpx"
+        mode="scaleToFill"
+        src="{{flag}}"
+      ></image>
+
+      <!-- <text style="color:white; z-index: 1; width: 300rpx; position: absolute; height: 100rpx; left: 55%; top: -110rpx">
+        蔬菜达人
+      </text> -->
+      
+    </view>
+  </view>
+  <view style="background-color: #f6f1ee;">
+
+    <repeat for="{{dishes}}" index="index" item="item" key="key">
+      <card :dish="item"/>
+    </repeat>
+
+  </view>
+
+  <view style="margin-top: 200rpx"></view>
+  <view>
+    <van-submit-bar
+      price="{{tot}}"
+      button-text="Submit"
+      bind:submit="onClickButton"
+      tip="{{ false }}"
+    >
+      <van-tag type="primary" @tap="back">
+        <view style="display:inline-block; vertical-align:top">
+          <image
+            style="width: 40rpx; height: 40rpx; margin-left: 50rpx; margin-top: 0rpx"
+            mode="scaleToFill"
+            src="{{refresh}}"
+          ></image>
+        </view>
+        <view style="display:inline-block; vertical-align:top">
+          <text style="margin-left: 8rpx; color: #0758c0;font-size: 35rpx"> Reanalyze </text>
+        </view>
+      </van-tag>
+    </van-submit-bar>
+    <!-- <view style="text-align: center; background-color: white; border: 2rpx solid #eeeeee; display: inline-block; border-radius: 50rpx; height: 100rpx; width: 300rpx"> 
+      <view style="display:inline-block; vertical-align:center; text-align:center">
+        <image
+          style="width: 40rpx; height: 40rpx; margin-top: 50rpx"
+          mode="scaleToFill"
+          src="{{refresh}}"
+        ></image>
+        <text style="display:inline; margin-top: 0rpx">Reanalyze</text>
+      </view>
+    </view>
+    <view style="display: inline-block; border-radius: 50rpx; height: 100rpx; width: 30%; background-color: #ff002b; color:white;" round> 圆形按钮 </view> -->
+  </view>
+
+</scroll-view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import Card from '../components/card'
+
+  export default class Result extends wepy.page {
+    config = {
+      navigationBarTitleText: 'SAP Food Recognition',
+      usingComponents: {
+        "van-button": "../vant-weapp/button/index",
+        "van-submit-bar": "../vant-weapp/submit-bar/index"
+      },
+      navigationBarBackgroundColor: '#482021',
+      navigationBarTextStyle: 'white'
+    }
+    components = {
+      card: Card
+    }
+
+    mixins = []
+
+    data = {
+      srcimage: '../images/plate.jpg',
+      medal: '../images/medal.png',
+      flag: '../images/flag.png',
+      refresh: '../images/refresh.png',
+      tot: 900,
+      dishes: [
+        {
+          path: '../images/plate1.jpg',
+          name: '炒土豆丝',
+          price: parseFloat('2.5').toFixed(2),
+          stars: this.getStarList('3'),
+          fat: 10,
+          calories: 187,
+          hot: 1
+        },
+        {
+          path: '../images/plate2.jpg',
+          name: '红烧大排',
+          price: parseFloat('2').toFixed(2),
+          stars: this.getStarList('4'),
+          fat: 52,
+          calories: 1388,
+          hot: 0,
+        },
+        {
+          path: '../images/plate3.jpg',
+          name: '白米饭',
+          price: parseFloat('1').toFixed(2),
+          stars: this.getStarList('1'),
+          fat: 30,
+          calories: 400,
+          hot: 1
+        },
+        {
+          path: '../images/plate4.jpg',
+          name: '炒娃娃菜',
+          price: parseFloat('3.5').toFixed(2),
+          stars: this.getStarList('5'),
+          fat: 0,
+          calories: 200,
+          hot: 1
+        },
+      ]
+    }
+
+    getStarList(stars){
+      let answer = []
+      const ostar = '../images/ostar.png'
+      const gstar = '../images/gstar.png'
+      stars = parseInt(stars, 10)
+      for(var i = 1; i <= 5; i++){
+        if(i <= stars){
+          answer.push(ostar)
+        }
+        else{
+          answer.push(gstar)
+        }
+      }
+      console.log(answer)
+      return answer
+    }
+
+    computed = {
+      now () {
+        return 0
+      }
+    }
+
+    methods = {
+      plus () {
+        this.mynum++
+      },
+      back (){
+        setTimeout(() => {
+          wx.navigateTo({url: 'camera'})
+        }, 100);
+      }
+    }
+
+    events = {
+    }
+
+    onLoad() {
+      this.srcimage = this.$parent.globalData.srcimage
+    }
+  }
+</script>
